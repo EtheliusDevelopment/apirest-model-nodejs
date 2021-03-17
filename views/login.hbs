@@ -1,0 +1,54 @@
+<form  method="post" id="login">
+
+    <input type="email" 
+    name="email" 
+    id="email"
+    value=""
+    placeholder="La Tua Email">
+    <br><br>
+    
+    <input 
+    type="password" 
+    name="password" 
+    id="password" 
+    value=""
+    placeholder="La tua Password">
+    <br><br>
+    <input 
+    type="submit" 
+    value="Login">
+
+</form>
+
+{{!-- Utilizzo Ajax per il formulario --}}
+
+<script>
+
+const login = document.querySelector('#login');
+        login.addEventListener ('submit', async (e)=>{
+            e.preventDefault()
+            
+            const email = document.querySelector('#email').value
+            const password = document.querySelector('#password').value
+            
+
+            try {
+                const data = await fetch(`api/signin`, {
+                    method : 'POST',
+                    headers : {
+                        'Content-Type': 'application/json'
+                    },
+                    body : JSON.stringify({email: email,  password : password})
+                    
+                })
+                const res = await data.json()
+                console.log (res)
+               
+                } catch (error) {
+                console.log(error)
+                
+            }
+        })   
+    </script>
+
+    
